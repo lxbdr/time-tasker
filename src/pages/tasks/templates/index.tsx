@@ -19,7 +19,6 @@ export default function ListTaskTemplates() {
           <Link href={`/tasks/templates/${item.id}`}>{item.name}</Link>
         </div>
       ))}
-      {JSON.stringify(taskTemplates.data)}
       <div>
         <CreateTaskTemplate/>
       </div>
