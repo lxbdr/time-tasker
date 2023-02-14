@@ -28,6 +28,8 @@ export function CreateChecklist(props: {
       taskId: taskTemplateId,
       name: checklistName,
     });
+
+    setChecklistName("");
   };
 
   return (
