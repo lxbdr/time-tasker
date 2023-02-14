@@ -4,7 +4,7 @@ import Input from "./Input";
 import Button from "./Button";
 
 export function CreateChecklist(props: {
-  taskTemplateId: number;
+  taskTemplateId: string;
   onSuccess?: () => void | Promise<void>;
 }) {
   const { onSuccess, taskTemplateId } = props;

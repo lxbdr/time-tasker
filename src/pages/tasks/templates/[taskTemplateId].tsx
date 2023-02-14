@@ -9,5 +9,5 @@ export default function SingleTaskTemplate() {
     return <div>Problem</div>;
   }
 
-  return <TaskTemplate taskTemplateId={Number.parseInt(taskTemplateId)} />;
+  return <TaskTemplate taskTemplateId={taskTemplateId} />;
 }

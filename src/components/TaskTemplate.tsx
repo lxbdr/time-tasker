@@ -2,7 +2,7 @@ import { api } from "../utils/api";
 import { AddBullet } from "./AddBullet";
 import { CreateChecklist } from "./CreateChecklist";
 
-export function TaskTemplate(props: { taskTemplateId: number }) {
+export function TaskTemplate(props: { taskTemplateId: string }) {
   const { taskTemplateId } = props;
 
   const taskTemplate = api.taskTemplate.get.useQuery({
@@ -26,11 +26,11 @@ export function TaskTemplate(props: { taskTemplateId: number }) {
       </h1>
       <h2 className={`mb-2 text-xl`}>Checklisten</h2>
       <ul className={`mb-3 rounded border p-4`}>
-        {data.checklists.map((checklist) => (
+        {data.checklistTemplates.map((checklist) => (
           <li key={checklist.id} className={`mb-3 rounded border p-4`}>
             <h3 className={`mb-2 border-b text-lg`}>{checklist.name}</h3>
             <ul>
-              {checklist.bullets.map((bullet) => (
+              {checklist.bulletTemplates.map((bullet) => (
                 <li key={bullet.id}>{bullet.name}</li>
               ))}
             </ul>
@@ -39,7 +39,7 @@ export function TaskTemplate(props: { taskTemplateId: number }) {
                 await taskTemplate.refetch();
               }}
               taskTemplateId={taskTemplateId}
-              checklistId={checklist.id}
+              checklistTemplateId={checklist.id}
             />
           </li>
         ))}

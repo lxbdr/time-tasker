@@ -1,81 +1,85 @@
 import { publicProcedure } from "../api/trpc";
-import { TaskTemplateSchema } from "../models/TaskTemplate";
 import { z } from "zod";
 
-const taskTemplates: TaskTemplateSchema[] = [
-  {
-    id: 1,
-    name: "Küche",
-    checklists: [],
-  },
-  {
-    id: 2,
-    name: "Badezimmer",
-    checklists: [],
-  },
-];
+export const CreateTaskTemplateSchema = z.object({
+  name: z.string(),
+});
 
-export const getAllTaskTemplates = publicProcedure.query(() => {
-  return taskTemplates;
+export const createTaskTemplate = publicProcedure
+  .input(CreateTaskTemplateSchema)
+  .mutation(async ({ ctx, input }) => {
+    const { prisma } = ctx;
+    await prisma.taskTemplate.create({
+      data: {
+        name: input.name,
+      },
+    });
+  });
+
+export const getAllTaskTemplates = publicProcedure.query(({ ctx }) => {
+  const { prisma } = ctx;
+
+  return prisma.taskTemplate.findMany();
 });
 
 export const addBullet = publicProcedure
   .input(
     z.object({
-      taskTemplateId: z.number(),
-      checklistId: z.number(),
+      taskTemplateId: z.string(),
+      checklistTemplateId: z.string(),
       name: z.string(),
     })
   )
   .mutation(({ ctx, input }) => {
-    const item = findTaskTemplate(input.taskTemplateId);
-    if (!item) {
-      return;
-    }
-    const checklist = findChecklist(item, input.checklistId);
-    if (!checklist) {
-      return;
-    }
-    checklist.bullets.push({
-      id: randomId(),
-      name: input.name,
+    const { prisma } = ctx;
+
+    return prisma.bulletTemplate.create({
+      data: {
+        name: input.name,
+        checklistTemplateId: input.checklistTemplateId,
+      },
     });
   });
 
-function findChecklist(taskTemplate: TaskTemplateSchema, checklistId: number) {
-  return taskTemplate.checklists.find(
-    (checklist) => checklist.id === checklistId
-  );
-}
-
 export const getTaskTemplate = publicProcedure
-  .input(z.object({ id: z.number() }))
-  .query(({ input }) => {
-    // todo: fetch task template
-    return taskTemplates[0];
-  });
+  .input(z.object({ id: z.string() }))
+  .query(({ ctx, input }) => {
+    const { prisma } = ctx;
 
-function findTaskTemplate(id: number) {
-  return taskTemplates.find((el) => el.id === id);
-}
+    return prisma.taskTemplate.findUnique({
+      where: {
+        id: input.id,
+      },
+      include: {
+        checklistTemplates: {
+          include: {
+            bulletTemplates: {},
+          },
+        },
+      },
+    });
+  });
 
 export const createChecklist = publicProcedure
   .input(
     z.object({
-      taskId: z.number(),
+      taskId: z.string(),
       name: z.string(),
     })
   )
   .mutation(({ ctx, input }) => {
-    const item = findTaskTemplate(input.taskId);
+    const { prisma } = ctx;
 
-    item?.checklists.push({
-      id: randomId(),
-      name: input.name,
-      bullets: [],
+    return prisma.checklistTemplate.create({
+      data: {
+        name: input.name,
+        taskTemplates: {
+          connect: [
+            {
+              id: input.taskId,
+            },
+          ],
+        },
+      },
     });
   });
-
-function randomId() {
-  return Math.floor(Math.random() * 10000);
-}

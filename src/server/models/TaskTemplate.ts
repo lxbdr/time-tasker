@@ -1,16 +1,16 @@
 export type TaskTemplateSchema = {
-  id: number;
+  id: string;
   name: string;
   checklists: Checklist[];
 };
 
 export type Bullet = {
-  id: number;
+  id: string;
   name: string;
 }
 
 export type Checklist = {
-  id: number;
+  id: string;
   name: string;
   bullets: Bullet[];
 }

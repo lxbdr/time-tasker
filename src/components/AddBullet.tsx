@@ -5,10 +5,10 @@ import Button from "./Button";
 
 export function AddBullet(props: {
   onSuccess?: () => void | Promise<void>;
-  taskTemplateId: number;
-  checklistId: number;
+  taskTemplateId: string;
+  checklistTemplateId: string;
 }) {
-  const { taskTemplateId, checklistId } = props;
+  const { taskTemplateId, checklistTemplateId } = props;
 
   const [bulletName, setBulletName] = useState("");
 
@@ -27,7 +27,7 @@ export function AddBullet(props: {
 
     addBulletMutation.mutate({
       taskTemplateId,
-      checklistId,
+      checklistTemplateId,
       name: bulletName,
     });
   };

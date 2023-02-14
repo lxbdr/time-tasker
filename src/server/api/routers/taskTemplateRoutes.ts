@@ -3,9 +3,9 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
   addBullet,
-  createChecklist,
+  createChecklist, createTaskTemplate,
   getAllTaskTemplates,
-  getTaskTemplate,
+  getTaskTemplate
 } from "../../controllers/TaskTemplateController";
 
 export const taskTemplateRouter = createTRPCRouter({
@@ -16,6 +16,8 @@ export const taskTemplateRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
+
+  createTaskTemplate,
 
   get: getTaskTemplate,
 
