@@ -17,19 +17,6 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <nav>
-          <ul className={`flex gap-3`}>
-            <li>
-              <Link href={"/"}>Home</Link>
-            </li>
-            <li>
-              <Link href={`/projects`}>Projects</Link>
-            </li>
-            <li>
-              <Link href={`/tasks/templates`}>Task Templates</Link>
-            </li>
-          </ul>
-        </nav>
         <Container>
           <h1>Projects</h1>
           <Link href={`/projects/create`}>Create new project</Link>
