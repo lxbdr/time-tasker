@@ -1,69 +1,16 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { ChangeEvent, useState } from "react";
-
-type TaskTemplateSchema = {
-  id: number;
-  name: string;
-  description: string;
-  checklists: ChecklistTemplateSchema[];
-};
-
-type ChecklistTemplateSchema = {
-  id: number;
-  name: string;
-  description: string;
-  bullets: BulletTemplateSchema[];
-};
-
-type BulletTemplateSchema = {
-  id: number;
-  name: string;
-  description: string;
-};
+import { useState } from "react";
+import { TaskTemplateSchema } from "../../server/models/TaskTemplate";
+import { api } from "../../utils/api";
 
 const Home: NextPage = () => {
   const [taskTemplates, setTaskTemplates] = useState<TaskTemplateSchema[]>([]);
   const [selectedTemplateId, setSelectedTemplateId] = useState("");
 
-  const availableTaskTemplates: TaskTemplateSchema[] = [
-    {
-      id: 10,
-      name: "Grundsetup",
-      description: "",
-      checklists: [
-        {
-          id: 100,
-          name: "WordPress installieren",
-          description: "",
-          bullets: [
-            {
-              id: 1,
-              name: "Datenbank anlegen",
-              description: "",
-            },
-            {
-              id: 2,
-              name: "User anlegen",
-              description: "",
-            },
-          ],
-        },
-        {
-          id: 200,
-          name: "Lokale Umgebung einrichten",
-          description: "",
-          bullets: [
-            {
-              id: 3,
-              name: "Vagrant installieren",
-              description: "",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  const availableTaskTemplatesQuery = api.taskTemplate.getAll.useQuery();
+
+  const availableTaskTemplates = availableTaskTemplatesQuery.data || [];
 
   function addTaskTemplate(id: number) {
     // find id
@@ -113,7 +60,7 @@ const Home: NextPage = () => {
             }}
             className={""}
           >
-            <option value={""} selected disabled>
+            <option value={""} disabled>
               Bitte wählen
             </option>
             {availableTaskTemplates.map((task) => (
@@ -141,7 +88,12 @@ const Home: NextPage = () => {
           </ul>
         </div>
         <div>
-          <button type={"button"} className={"bg-green-400 text-white text-sm p-2 rounded"}>Projekt anlegen</button>
+          <button
+            type={"button"}
+            className={"rounded bg-green-400 p-2 text-sm text-white"}
+          >
+            Projekt anlegen
+          </button>
         </div>
       </main>
     </>
