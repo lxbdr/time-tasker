@@ -22,3 +22,18 @@ export const createProject = publicProcedure
       },
     });
   });
+
+export const getProject = publicProcedure
+  .input(
+    z.object({
+      id: z.string(),
+    })
+  )
+  .query(({ ctx, input }) => {
+    return ctx.prisma.project.findUnique({
+      where: {
+        id: input.id,
+      },
+    });
+  });
+

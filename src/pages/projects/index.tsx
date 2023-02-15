@@ -1,5 +1,6 @@
 import { api } from "../../utils/api";
 import { CreateProject } from "../../components/CreateProject";
+import Link from "next/link";
 
 export default function ListProjectsPage() {
   const getAllProjectsQuery = api.project.getAllProjects.useQuery();
@@ -9,7 +10,9 @@ export default function ListProjectsPage() {
       Liste aller Projekte
       {getAllProjectsQuery.data &&
         getAllProjectsQuery.data.map((project) => (
-          <div key={project.id}>{project.name}</div>
+          <Link href={`/projects/${project.id}`} key={project.id}>
+            {project.name}
+          </Link>
         ))}
       <div>
         <CreateProject />
