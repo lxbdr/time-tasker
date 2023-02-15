@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
 import { useState } from "react";
+import Container from "../../components/Container";
+import Button from "../../components/Button";
 
 export default function SingleProjectPage() {
   const router = useRouter();
@@ -55,24 +57,30 @@ export function Project(props: { projectId: string }) {
   const data = projectQuery.data;
 
   return (
-    <div>
-      <h1>{data.name}</h1>
+    <Container>
+      <header className="mt-4 border-b pb-2">
+        <div className="mb-0 text-xs uppercase tracking-widest">Project</div>
+        <h1 className="text-2xl">{data.name}</h1>
+      </header>
       <div className="mt-3">
-        Tasks:
-        <ul className={"p-4 border border-red-400"}>
+        <ul className={"py-4"}>
           {data.tasks.map((task) => (
             <li key={task.id}>
-              {task.name}
-              <div>Checklists</div>
-              <ul className={"p-4  border border-blue-400"}>
+              <div className="mb-0 text-xs uppercase tracking-widest">Task</div>
+              <h2 className="text-xl">{task.name}</h2>
+              <ul className="mt-4  py-4">
                 {task.checklists.map((checklist) => (
                   <li key={checklist.id}>
-                    <div>{checklist.name}</div>
-                    <div>Bullets:</div>
-                    <ul className={"p-4 border border-green-400"}>
+                    <div className="mb-0 text-xs uppercase tracking-widest">
+                      Checklist
+                    </div>
+                    <h3 className="text-lg">{checklist.name}</h3>
+                    <ul className={"mb-6 flex flex-col space-y-3  py-4"}>
                       {checklist.bullets.map((bullet) => (
                         <li key={bullet.id}>
-                          <input type="checkbox" />  {bullet.name}
+                          <div className="rounded bg-gray-600 p-2">
+                            <input type="checkbox" /> {bullet.name}
+                          </div>
                         </li>
                       ))}
                     </ul>
@@ -83,8 +91,8 @@ export function Project(props: { projectId: string }) {
           ))}
         </ul>
       </div>
-      <div className="mt-3">
-        <h2>Task Templates hinzufügen</h2>
+      <div className="mt-3 border-t py-2">
+        <h2 className="mb-3">Task Templates hinzufügen</h2>
         {taskTemplatesQuery.data && (
           <div>
             <select
@@ -100,16 +108,18 @@ export function Project(props: { projectId: string }) {
                 </option>
               ))}
             </select>
-            <button
-              onClick={() => {
-                handleAddTaskTemplate();
-              }}
-            >
-              Task Template hinzufügen
-            </button>
+            <div className="my-3">
+              <Button
+                onClick={() => {
+                  handleAddTaskTemplate();
+                }}
+              >
+                Task Template hinzufügen
+              </Button>
+            </div>
           </div>
         )}
       </div>
-    </div>
+    </Container>
   );
 }
