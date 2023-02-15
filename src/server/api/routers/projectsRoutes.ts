@@ -1,5 +1,6 @@
 import { createTRPCRouter } from "../trpc";
 import {
+  addTaskTemplate,
   createProject,
   getAllProjects,
   getProject,
@@ -11,4 +12,6 @@ export const projectsRoutes = createTRPCRouter({
   createProject,
 
   getProject,
+
+  addTaskTemplate,
 });
