@@ -1,11 +1,13 @@
-import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from 'next-themes';
+import { type AppType } from "next/app";
+import Layout from "../components/Layout";
 
 import { api } from "../utils/api";
 
-import "../styles/globals.css";
 import Link from "next/link";
+import "../styles/globals.css";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -13,22 +15,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <header id={"site-header"}>
-        <nav>
-          <ul className={`flex gap-3`}>
-            <li>
-              <Link href={"/"}>Home</Link>
-            </li>
-            <li>
-              <Link href={`/projects`}>Projects</Link>
-            </li>
-            <li>
-              <Link href={`/tasks/templates`}>Task Templates</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <Component {...pageProps} />
+      <ThemeProvider attribute="class">
+        <Layout>
+          <Component {...pageProps} />
+        </Layout >
+      </ThemeProvider>
     </SessionProvider>
   );
 };

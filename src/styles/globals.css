@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+  body {    
+    @apply transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6, label {
+    @apply dark:text-white;
+  }
+
+  input, textarea, select, button {
+    @apply dark:bg-slate-800 dark:text-slate-200;
+  }
+}
