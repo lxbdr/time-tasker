@@ -14,7 +14,7 @@ const navigation = [
 
 export default function NavMenu() {
   return (
-    <Popover as="header" id={"site-header"} className="relative z-40 w-full shadow lg:fixed">
+    <Popover as="header" id={"site-header"} className="relative z-40 w-full shadow">
       <div className="bg-slate-900 pt-3 pb-3">
         <nav
           className="relative mx-auto flex max-w-7xl items-center justify-between px-4  sm:px-6"
