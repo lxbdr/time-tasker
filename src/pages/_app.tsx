@@ -6,7 +6,6 @@ import Layout from "../components/Layout";
 
 import { api } from "../utils/api";
 
-import Link from "next/link";
 import "../styles/globals.css";
 
 const MyApp: AppType<{ session: Session | null }> = ({

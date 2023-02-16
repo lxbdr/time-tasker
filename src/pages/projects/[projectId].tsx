@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import { api } from "../../utils/api";
 import { useState } from "react";
-import Container from "../../components/Container";
 import Button from "../../components/Button";
+import Container from "../../components/Container";
+import { api } from "../../utils/api";
 
 export default function SingleProjectPage() {
   const router = useRouter();
@@ -77,10 +77,10 @@ export function Project(props: { projectId: string }) {
                     <h3 className="text-lg">{checklist.name}</h3>
                     <ul className={"mb-6 flex flex-col space-y-3  py-4"}>
                       {checklist.bullets.map((bullet) => (
-                        <li key={bullet.id}>
-                          <div className="rounded bg-gray-600 p-2">
-                            <input type="checkbox" /> {bullet.name}
-                          </div>
+                        <li key={bullet.id} >
+                          <label htmlFor={bullet.id} className="rounded bg-gray-200 dark:bg-gray-700 p-2 block">
+                            <input type="checkbox" id={bullet.id} className="mr-2" />  {bullet.name}
+                          </label>
                         </li>
                       ))}
                     </ul>

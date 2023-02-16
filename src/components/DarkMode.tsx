@@ -10,10 +10,7 @@ const DarkMode = () => {
     setMounted(true);
   }, []);
 
-  const navigations = [
-    { label: "Home", path: "/" },
-    { label: "About", path: "/about" },
-  ];
+
   const renderThemeChanger = () => {
     if (!mounted) return null;
 
@@ -45,7 +42,7 @@ const DarkMode = () => {
     } else {
       return (
         <Button
-          className="bg-gray-200 p-2.5"
+          className="bg-gray-600 p-2.5"
           onClick={() => setTheme("dark")}
           aria-label="dark mode toggle"
           aria-checked="true"

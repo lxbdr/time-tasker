@@ -1,12 +1,12 @@
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 import DarkMode from "./DarkMode";
 
 
 const navigation = [
-  { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Create", href: "/projects/create" },
   { name: "Templates", href: "/tasks/templates" },
@@ -15,24 +15,24 @@ const navigation = [
 export default function NavMenu() {
   return (
     <Popover as="header" id={"site-header"} className="relative z-40 w-full shadow">
-      <div className="bg-slate-900 pt-3 pb-3">
+      <div className="bg-slate-700 pt-3 pb-3">
         <nav
-          className="relative mx-auto flex max-w-7xl items-center justify-between px-4  sm:px-6"
+          className="relative mx-auto flex max-w-6xl items-center justify-between px-4"
           aria-label="Global"
         >
           <div className="flex flex-1 items-center">
             <div className="flex w-full items-center justify-between md:w-auto">
               <Link href="/">
-                <span className="sr-only">Eli Media</span>
+                <span className="sr-only">Time Tasker</span>
                 {/* LOGO HERE  */}
-                {/* <Image
-                    priority
-                    className="h-8 w-auto sm:h-8"
-                    width="400"
-                    height="104"
-                    src=""
-                    alt=""
-                  /> */}
+                <Image
+                  priority
+                  className="h-8 w-auto sm:h-8"
+                  width="400"
+                  height="192"
+                  src="/timetasker.png"
+                  alt="Time Tasker Logo"
+                />
               </Link>
 
               {/* Dropdown Toggle */}
@@ -46,7 +46,7 @@ export default function NavMenu() {
             </div>
 
             {/* Desktop Nav Items */}
-            <div className="hidden space-x-4 lg:space-x-8 md:ml-10 md:flex">
+            <div className="hidden space-x-4 lg:space-x-8 md:ml-10 md:flex px-4">
               {navigation.map((item) => (
                 <Link key={item.name} href={item.href}
 
@@ -80,15 +80,13 @@ export default function NavMenu() {
             <div className="flex items-center justify-between bg-slate-900 px-5 pt-4 pb-3">
               <div className="-mt-4 -ml-2 ">
                 <Link href="/">
-                  Test
-                  {/* SAME LOGO HERE */}
-                  {/* <Image
-                      className="h-8 w-auto sm:h-8"
-                      width="400"
-                      height="104"
-                      src=""
-                      alt=""
-                    /> */}
+                  <Image
+                    className="h-8 w-auto sm:h-8"
+                    width="400"
+                    height="192"
+                    src="/timetasker.png"
+                    alt="Time Tasker Logo"
+                  />
                 </Link>
               </div>
 

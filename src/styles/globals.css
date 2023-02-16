@@ -20,4 +20,8 @@
   input, textarea, select, button {
     @apply dark:bg-slate-800 dark:text-slate-200;
   }
+
+  input, checkbox {
+    @apply dark:bg-slate-800 dark:text-slate-500 ;
+  }
 }
