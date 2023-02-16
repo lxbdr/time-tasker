@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Fragment } from "react";
 import DarkMode from "./DarkMode";
 
-
 const navigation = [
   { name: "Projects", href: "/projects" },
   { name: "Create", href: "/projects/create" },
@@ -14,7 +13,11 @@ const navigation = [
 
 export default function NavMenu() {
   return (
-    <Popover as="header" id={"site-header"} className="relative z-40 w-full shadow">
+    <Popover
+      as="header"
+      id={"site-header"}
+      className="relative z-40 w-full shadow"
+    >
       <div className="bg-slate-700 pt-3 pb-3">
         <nav
           className="relative mx-auto flex max-w-6xl items-center justify-between px-4"
@@ -30,7 +33,7 @@ export default function NavMenu() {
                   className="h-8 w-auto sm:h-8"
                   width="400"
                   height="192"
-                  src="/timetasker.png"
+                  src="/time-tasker-logo-white.svg"
                   alt="Time Tasker Logo"
                 />
               </Link>
@@ -46,11 +49,13 @@ export default function NavMenu() {
             </div>
 
             {/* Desktop Nav Items */}
-            <div className="hidden space-x-4 lg:space-x-8 md:ml-10 md:flex px-4">
+            <div className="hidden space-x-4 px-4 md:ml-10 md:flex lg:space-x-8">
               {navigation.map((item) => (
-                <Link key={item.name} href={item.href}
-
-                  className="pt-2 text-base font-medium text-white hover:text-gray-300">
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="pt-2 text-base font-medium text-white hover:text-gray-300"
+                >
                   {item.name}
                 </Link>
               ))}
@@ -60,7 +65,7 @@ export default function NavMenu() {
             <DarkMode />
           </div>
         </nav>
-      </div >
+      </div>
 
       {/* Mobile Nav */}
       <Transition
@@ -84,7 +89,7 @@ export default function NavMenu() {
                     className="h-8 w-auto sm:h-8"
                     width="400"
                     height="192"
-                    src="/timetasker.png"
+                    src="/time-tasker-logo-white.svg"
                     alt="Time Tasker Logo"
                   />
                 </Link>
