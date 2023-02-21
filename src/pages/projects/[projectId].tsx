@@ -27,13 +27,57 @@ export function Project(props: { projectId: string }) {
     id: projectId,
   });
 
+  const utils = api.useContext();
+
   const taskTemplatesQuery = api.taskTemplate.getAll.useQuery();
 
   const addTaskTemplateMutation = api.project.addTaskTemplate.useMutation();
 
   const toggleBulletMutation = api.task.toggleBullet.useMutation({
-    async onSuccess() {
-      await projectQuery.refetch();
+    async onMutate(updated) {
+      // await utils.task.;
+      await utils.project.getProject.cancel();
+
+      const previousData = utils.project.getProject.getData({ id: projectId });
+
+      if (!previousData) {
+        return;
+      }
+
+      utils.project.getProject.setData({ id: projectId }, (project) => {
+        if (!project) {
+          return project;
+        }
+
+        project.tasks = project.tasks.map((task) => {
+          return {
+            ...task,
+            checklists: task.checklists.map((checklist) => {
+              return {
+                ...checklist,
+                bullets: checklist.bullets.map((bullet) => {
+                  if (
+                    bullet.id === updated.id &&
+                    updated.checked !== undefined
+                  ) {
+                    console.log("found bullet");
+                    return {
+                      ...bullet,
+                      checked: updated.checked,
+                    };
+                  }
+                  return bullet;
+                }),
+              };
+            }),
+          };
+        });
+
+        return project;
+      });
+    },
+    async onSettled() {
+      // await utils.project.getProject.invalidate();
     },
   });
 
