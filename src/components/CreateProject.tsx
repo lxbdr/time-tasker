@@ -33,7 +33,7 @@ export function CreateProject(props: {
   return (
     <div>
       <Input
-        label={"Neue Checkliste"}
+        label={"Neues Projekt"}
         value={createProject}
         onChange={(ev) => {
           setCreateProject(ev.target.value);
