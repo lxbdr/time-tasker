@@ -10,9 +10,9 @@ export default function ListProjectsPage() {
       Liste aller Projekte
       {getAllProjectsQuery.data &&
         getAllProjectsQuery.data.map((project) => (
-          <Link href={`/projects/${project.id}`} key={project.id}>
-            {project.name}
-          </Link>
+          <div key={project.id}>
+            <Link href={`/projects/${project.id}`}>{project.name}</Link>
+          </div>
         ))}
       <div>
         <CreateProject />
