@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import { api } from "../../utils/api";
+import Bullet from "../../components/Bullet";
 
 export default function SingleProjectPage() {
   const router = useRouter();
@@ -30,6 +31,12 @@ export function Project(props: { projectId: string }) {
 
   const addTaskTemplateMutation = api.project.addTaskTemplate.useMutation();
 
+  const toggleBulletMutation = api.task.toggleBullet.useMutation({
+    async onSuccess() {
+      await projectQuery.refetch();
+    },
+  });
+
   const [selectedTaskTemplate, setSelectedTaskTemplate] = useState("");
 
   const handleAddTaskTemplate = () => {
@@ -56,6 +63,13 @@ export function Project(props: { projectId: string }) {
 
   const data = projectQuery.data;
 
+  const handleCheckBullet = (bulletId: string, checked: boolean) => {
+    toggleBulletMutation.mutate({
+      id: bulletId,
+      checked,
+    });
+  };
+
   return (
     <Container>
       <header className="mt-4 border-b pb-2">
@@ -77,10 +91,14 @@ export function Project(props: { projectId: string }) {
                     <h3 className="text-lg">{checklist.name}</h3>
                     <ul className={"mb-6 flex flex-col space-y-3  py-4"}>
                       {checklist.bullets.map((bullet) => (
-                        <li key={bullet.id} >
-                          <label htmlFor={bullet.id} className="rounded bg-gray-200 dark:bg-gray-700 p-2 block">
-                            <input type="checkbox" id={bullet.id} className="mr-2" />  {bullet.name}
-                          </label>
+                        <li key={bullet.id}>
+                          <Bullet
+                            name={bullet.name || "todo: bullet name"}
+                            checked={bullet.checked}
+                            onChange={(checked) => {
+                              void handleCheckBullet(bullet.id, checked);
+                            }}
+                          />
                         </li>
                       ))}
                     </ul>
