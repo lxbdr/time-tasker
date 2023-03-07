@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api } from "../utils/api";
+import { Button } from "./Button";
 import Input from "./Input";
-import Button from "./Button";
 
 export function CreateTaskTemplate() {
   const [taskTemplateName, setTaskTemplateName] = useState("");

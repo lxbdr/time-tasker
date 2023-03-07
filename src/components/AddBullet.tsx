@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api } from "../utils/api";
+import { Button } from "./Button";
 import Input from "./Input";
-import Button from "./Button";
 
 export function AddBullet(props: {
   onSuccess?: () => void | Promise<void>;
@@ -42,6 +42,8 @@ export function AddBullet(props: {
         }}
       />
       <Button
+        variant="secondary"
+        size="sm"
         onClick={() => {
           handleAddBullet();
         }}
