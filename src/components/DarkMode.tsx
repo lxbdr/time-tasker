@@ -1,6 +1,6 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import Button from "./Button";
+import { Button } from "./Button";
 
 const DarkMode = () => {
   const { systemTheme, theme, setTheme } = useTheme();
@@ -19,6 +19,7 @@ const DarkMode = () => {
     if (currentTheme === "dark") {
       return (
         <Button
+          variant={'darkmodetoggle'}
           className="bg-slate-200 p-2.5 dark:bg-slate-600 ml-4"
           onClick={() => setTheme("light")}
           aria-label="dark mode toggle"
@@ -42,7 +43,8 @@ const DarkMode = () => {
     } else {
       return (
         <Button
-          className="bg-gray-600 p-2.5"
+          variant={'darkmodetoggle'}
+          className="p-2.5"
           onClick={() => setTheme("dark")}
           aria-label="dark mode toggle"
           aria-checked="true"

@@ -1,7 +1,7 @@
-import { api } from "../utils/api";
 import { useState } from "react";
+import { api } from "../utils/api";
+import { Button } from "./Button";
 import Input from "./Input";
-import Button from "./Button";
 
 export function CreateProject(props: {
   onSuccess?: () => void | Promise<void>;
@@ -40,7 +40,6 @@ export function CreateProject(props: {
         }}
       />
       <Button
-        className={"mt-2"}
         onClick={() => {
           handleCreateProject();
         }}

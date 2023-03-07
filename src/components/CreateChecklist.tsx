@@ -1,7 +1,7 @@
-import { api } from "../utils/api";
 import { useState } from "react";
+import { api } from "../utils/api";
+import { Button } from "./Button";
 import Input from "./Input";
-import Button from "./Button";
 
 export function CreateChecklist(props: {
   taskTemplateId: string;

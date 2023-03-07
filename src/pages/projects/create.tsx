@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
+import { Button } from "../../components/Button";
 import type { TaskTemplateSchema } from "../../server/models/TaskTemplate";
 import { api } from "../../utils/api";
 
@@ -88,12 +89,11 @@ const Home: NextPage = () => {
           </ul>
         </div>
         <div>
-          <button
+          <Button
             type={"button"}
-            className={"rounded bg-green-400 p-2 text-sm text-white"}
           >
             Projekt anlegen
-          </button>
+          </Button>
         </div>
       </main>
     </>

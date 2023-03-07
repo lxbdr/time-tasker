@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import Link from "next/link";
+import { Button } from "../components/Button";
 
 import Container from "../components/Container";
 import { api } from "../utils/api";
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
       <main>
         <Container>
           <h1>Projects</h1>
-          <Link href={`/projects/create`}>Create new project</Link>
+          <Button href={`/projects/create`}>Create new project</Button>
         </Container>
       </main>
     </>

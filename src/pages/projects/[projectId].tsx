@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Button from "../../components/Button";
+import Bullet from "../../components/Bullet";
+import { Button } from "../../components/Button";
 import Container from "../../components/Container";
 import { api } from "../../utils/api";
-import Bullet from "../../components/Bullet";
 
 export default function SingleProjectPage() {
   const router = useRouter();
