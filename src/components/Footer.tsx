@@ -1,9 +1,14 @@
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { Button, buttonVariants } from './Button';
 
 const Year = new Date().getFullYear();
 
 
 export default function Footer() {
+
+  const { data: sessionData } = useSession();
+
   return (
     <footer className="bg-gray-900" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
@@ -15,9 +20,7 @@ export default function Footer() {
 
         <div className="mt-8  pt-0 md:flex md:items-center md:justify-between">
 
-          <div className="flex space-x-6 md:order-2">
 
-          </div>
           <p className="mt-8 text-base text-gray-400 md:order-1 md:mt-0 ">
             &copy; {Year} Time Tasker |{" "}
             <Link href="">
@@ -28,8 +31,16 @@ export default function Footer() {
               <span className="hover:text-white">Impressum</span>
             </Link>{" "}
           </p>
+
+          <div className="flex md:order-2">
+            <Button className={buttonVariants({ variant: 'link', className: 'text-white' })} href="/signin/">{sessionData ? "Sign out" : "Sign in"}</Button>
+          </div>
+
         </div>
+
+
       </div>
-    </footer>
+
+    </footer >
   );
 }
