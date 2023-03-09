@@ -3,10 +3,12 @@ import type { GetServerSidePropsContext } from "next";
 import {
   getServerSession, type DefaultSession, type NextAuthOptions
 } from "next-auth";
+import Auth0Provider from "next-auth/providers/auth0";
 import EmailProvider from "next-auth/providers/email";
 import GithubProvider from "next-auth/providers/github";
 import { env } from "../env.mjs";
 import { prisma } from "./db";
+
 
 
 /**
@@ -63,6 +65,11 @@ export const authOptions: NextAuthOptions = {
         }
       },
       from: process.env.EMAIL_FROM
+    }),
+    Auth0Provider({
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      issuer: process.env.AUTH0_ISSUER
     }),
     /**
      * ...add more providers here
