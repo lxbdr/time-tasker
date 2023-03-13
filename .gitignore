@@ -1,3 +1,6 @@
+# database persistence
+.db
+
 .idea
 .vscode
 

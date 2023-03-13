@@ -1,0 +1,11 @@
+services:
+  postgresql:
+    image: 'bitnami/postgresql'
+    ports:
+      - '50432:5432'
+    volumes:
+      - ./.db/postgresql-persistence:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_USERNAME=timetasker
+      - POSTGRESQL_PASSWORD=timetasker
+      - POSTGRESQL_DATABASE=timetasker
