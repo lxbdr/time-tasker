@@ -87,6 +87,7 @@ export function Project(props: { projectId: string }) {
     if (!selectedTaskTemplate) {
       return;
     }
+    console.log("clicked");
 
     addTaskTemplateMutation.mutate(
       {
@@ -162,8 +163,10 @@ export function Project(props: { projectId: string }) {
               onChange={(ev) => {
                 setSelectedTaskTemplate(ev.target.value);
               }}
-              placeholder={"Auswählen"}
             >
+              <option value="" disabled>
+                Auswählen
+              </option>
               {taskTemplatesQuery.data.map((taskTemplate) => (
                 <option key={taskTemplate.id} value={taskTemplate.id}>
                   {taskTemplate.name}
